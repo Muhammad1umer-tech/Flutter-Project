@@ -95,4 +95,20 @@ class Carts with ChangeNotifier {
     itemCount = 0;
     notifyListeners();
   }
+
+  void undo(String id) {
+    if (_item[id].quantity > 1) {
+      _item.update(
+          id,
+          (Cart_Item) => CartItem(
+                Cart_Item.ProductiD,
+                Cart_Item.price,
+                Cart_Item.quantity -= 1,
+              ));
+    } else {
+      _item.remove(id);
+    }
+    itemCount -= 1;
+    notifyListeners();
+  }
 }

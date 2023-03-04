@@ -68,6 +68,7 @@ class NewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final obj = Provider.of<Products>(context, listen: false);
+    final obj1 = Provider.of<Carts>(context);
     final item = fav == false ? obj.items : obj.fav_items;
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -117,6 +118,17 @@ class productGrid extends StatelessWidget {
           trailing: IconButton(
             onPressed: () {
               obj1.addItem(obj.id);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Item Added To Cart'),
+                  duration: const Duration(seconds: 2),
+                  action: SnackBarAction(
+                      label: 'UNDO',
+                      onPressed: () {
+                        obj1.undo(obj.id);
+                      }),
+                ),
+              );
             },
             color: Theme.of(context).colorScheme.secondary,
             icon: const Icon(Icons.shopping_cart),

@@ -3,6 +3,7 @@ import 'package:shop/screens/CartScreen.dart';
 import 'package:shop/screens/OrdersScreen.dart';
 
 import 'OrderScreen.dart';
+import 'User_Product_Screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -30,6 +31,15 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           title: Text('Shop'),
+        ),
+        ListTile(
+          leading: IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              Navigator.of(context).pushNamed(UserProductScreen.routename);
+            },
+          ),
+          title: Text('Manage Products'),
         ),
       ]),
     );

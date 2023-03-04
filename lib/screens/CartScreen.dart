@@ -47,6 +47,27 @@ class CartScreen extends StatelessWidget {
             child: ListView.builder(
                 itemCount: _item.length,
                 itemBuilder: (context, index) => Dismissible(
+                      confirmDismiss: (d) {
+                        return showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Are you sure?'),
+                            content: Text('Do you to delete item from cart?'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(true);
+                                  },
+                                  child: Text('Yes')),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(false);
+                                  },
+                                  child: Text('No')),
+                            ],
+                          ),
+                        );
+                      },
                       key: ValueKey(_item[index].id),
                       onDismissed: (di) {
                         obj.remove_item(_item[index].id);
