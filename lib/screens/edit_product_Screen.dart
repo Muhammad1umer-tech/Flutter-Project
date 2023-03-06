@@ -26,17 +26,25 @@ class _edit_product_ScreenState extends State<edit_product_Screen> {
     super.dispose();
   }
 
-  void saveform() {
+  void saveform(List<String> k) {
     final isvalid = _form.currentState.validate();
     if (!isvalid) return;
 
     _form.currentState.save();
-    Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+    if (k[1] == "1") {
+      print("111111111111111111111");
+      Provider.of<Products>(context, listen: true)
+          .editProduct(k, _editedProduct);
+    } else {
+      print("00000000000000");
+      Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+    }
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    final obj = ModalRoute.of(context).settings.arguments as List<String>;
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Product'),
@@ -138,7 +146,7 @@ class _edit_product_ScreenState extends State<edit_product_Screen> {
                         keyboardType: TextInputType.url,
                         textInputAction: TextInputAction.done,
                         controller: _imageurlController,
-                        onFieldSubmitted: (value) => saveform(),
+                        onFieldSubmitted: (value) => saveform(obj),
                         onSaved: (newValue) {
                           _editedProduct = Product(
                             id: _editedProduct.id,

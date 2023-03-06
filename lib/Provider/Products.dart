@@ -60,16 +60,16 @@ class Products with ChangeNotifier {
     );
 
     _item.add(pro);
-    _item.insert(0, pro); //to insert at start
+    //_item.insert(0, pro); //to insert at start
     notifyListeners();
   }
 
-  void editProduct(String id, Product pro) {
-    var editPro = Product();
-
+  void editProduct(List<String> k, Product editPro) {
     for (int a = 0; a < _item.length; a++) {
-      if (_item[a].id == id) {
-        _item[a] = pro;
+      if (_item[a].id == k[0]) {
+        _item.remove(_item[a]);
+        _item.insert(a, editPro);
+        print("done");
         break;
       }
     }

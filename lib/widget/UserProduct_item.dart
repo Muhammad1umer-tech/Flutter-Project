@@ -22,9 +22,13 @@ class UserItem extends StatelessWidget {
               Spacer(),
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(
-                        edit_product_Screen.routename,
-                        arguments: id);
+                    List<String> k = [];
+                    k.add(id);
+                    k.add("1");
+                    print(id);
+                    print("idddddddddd");
+                    Navigator.of(context)
+                        .pushNamed(edit_product_Screen.routename, arguments: k);
                   },
                   icon:
                       Icon(Icons.edit, color: Theme.of(context).primaryColor)),
