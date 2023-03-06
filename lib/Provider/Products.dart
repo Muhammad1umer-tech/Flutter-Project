@@ -49,4 +49,29 @@ class Products with ChangeNotifier {
   List<Product> get fav_items {
     return _item.where((element) => element.favroite == true).toList();
   }
+
+  void addProduct(Product pro) {
+    final newpro = Product(
+      id: DateTime.now().toString(),
+      title: pro.title,
+      description: pro.description,
+      price: pro.price,
+      imageUrl: pro.imageUrl,
+    );
+
+    _item.add(pro);
+    _item.insert(0, pro); //to insert at start
+    notifyListeners();
+  }
+
+  void editProduct(String id, Product pro) {
+    var editPro = Product();
+
+    for (int a = 0; a < _item.length; a++) {
+      if (_item[a].id == id) {
+        _item[a] = pro;
+        break;
+      }
+    }
+  }
 }
