@@ -50,28 +50,35 @@ class Products with ChangeNotifier {
     return _item.where((element) => element.favroite == true).toList();
   }
 
-  void addProduct(Product pro) {
-    final newpro = Product(
-      id: DateTime.now().toString(),
-      title: pro.title,
-      description: pro.description,
-      price: pro.price,
-      imageUrl: pro.imageUrl,
-    );
+  Product findById(String id) {
+    return _item.firstWhere((prod) => prod.id == id);
+  }
 
-    _item.add(pro);
-    //_item.insert(0, pro); //to insert at start
+  void addProduct(Product product) {
+    final newProduct = Product(
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      id: DateTime.now().toString(),
+    );
+    _item.add(newProduct);
+    // _items.insert(0, newProduct); // at the start of the list
     notifyListeners();
   }
 
-  void editProduct(List<String> k, Product editPro) {
-    for (int a = 0; a < _item.length; a++) {
-      if (_item[a].id == k[0]) {
-        _item.remove(_item[a]);
-        _item.insert(a, editPro);
-        print("done");
-        break;
-      }
+  void updateProduct(String id, Product newProduct) {
+    final prodIndex = _item.indexWhere((prod) => prod.id == id);
+    if (prodIndex >= 0) {
+      _item[prodIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
     }
+  }
+
+  void deleteProduct(String id) {
+    _item.removeWhere((prod) => prod.id == id);
+    notifyListeners();
   }
 }

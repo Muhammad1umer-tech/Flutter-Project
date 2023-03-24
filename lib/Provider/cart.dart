@@ -59,13 +59,20 @@ class Carts with ChangeNotifier {
   List<Product> get cart_Product {
     List<Product> pro = [];
     final it = Products();
-    for (int a = 0; a < _item.length; a++) {
-      var id = _item.keys.toList()[a];
-      pro.add(
-        it.items.firstWhere((element) => element.id == id),
-      );
-    }
+    // for (int a = 0; a < _item.length; a++) {
+    //   var id = _item.keys.toList()[a];
+    //   pro.add(
+    //     it.items.firstWhere((element) => element.id == id),
+    //   );
+    // }
+    print(it.item_length);
     return pro;
+  }
+
+  void show() {
+    for (int a = 0; a < _item.length; a++) {
+      print(_item.values.toList()[a].ProductiD);
+    }
   }
 
   int return_quantity(String id) {

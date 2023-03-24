@@ -18,11 +18,8 @@ class UserProductScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                List<String> k = [];
-                k.add("id");
-                k.add("0");
-                Navigator.of(context)
-                    .pushNamed(edit_product_Screen.routename, arguments: k);
+                Navigator.of(context).pushNamed(EditProductScreen.routename,
+                    arguments: item[0].id);
               },
               icon: Icon(Icons.add))
         ],
@@ -31,10 +28,9 @@ class UserProductScreen extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: ListView.builder(
           itemCount: item.length,
-          itemBuilder: (context, index) => UserItem(
-            id: item[index].id,
-            title: item[index].title,
-            imageurl: item[index].imageUrl,
+          itemBuilder: (context, index) => ChangeNotifierProvider.value(
+            value: item[index],
+            child: UserItem(),
           ),
         ),
       ),
